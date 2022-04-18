@@ -25,7 +25,9 @@ class Post
 
     public static function all()
     {
-      return  collect(File::files(resource_path("posts")))
+        return cache()->rememberForever('posts.all',function(){
+
+        return  collect(File::files(resource_path("posts")))
             ->map(function ($file) {
                 return \Spatie\YamlFrontMatter\YamlFrontMatter::parseFile($file);
             })
@@ -38,7 +40,10 @@ class Post
                     $document->body(),
                     $document->slug
                 );
-            });
+            })->sortByDesc('date');
+
+    });
+
     }
         // Of all the blog posts, find the onoe with a slug that maches the one that was requested.
     public static function find($slug)
