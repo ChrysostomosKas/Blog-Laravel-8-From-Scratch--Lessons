@@ -1,8 +1,6 @@
-<!doctype html>
-<title>My blog</title>
+<!DOCTYPE HTML>
+<title>My Blog</title>
 <link rel="stylesheet" href="/app.css">
-
-
 <body>
-     {{$slot}}
+{{ $slot }}
 </body>
