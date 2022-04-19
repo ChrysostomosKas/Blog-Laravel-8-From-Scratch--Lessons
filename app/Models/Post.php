@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\File;
+use Spatie\YamlFrontMatter\YamlFrontMatter;
 
 class Post
 {
@@ -25,38 +26,36 @@ class Post
 
     public static function all()
     {
-        return cache()->rememberForever('posts.all',function(){
+        return cache()->rememberForever('posts.all', function () {
+            return collect(File::files(resource_path("posts")))
+                ->map(function ($file) {
+                    return YamlFrontMatter::parseFile($file);
+                })
+                ->map(function ($document) {
 
-        return  collect(File::files(resource_path("posts")))
-            ->map(function ($file) {
-                return \Spatie\YamlFrontMatter\YamlFrontMatter::parseFile($file);
-            })
-            ->map(function ($document){
-
-                return new Post(
-                    $document->title,
-                    $document->excerpt,
-                    $document->date,
-                    $document->body(),
-                    $document->slug
-                );
-            })->sortByDesc('date');
-
-    });
+                    return new Post(
+                        $document->title,
+                        $document->excerpt,
+                        $document->date,
+                        $document->body(),
+                        $document->slug
+                    );
+                })->sortByDesc('date');
+        });
 
     }
-        // Of all the blog posts, find the onoe with a slug that maches the one that was requested.
+
+    // Of all the blog posts, find the onoe with a slug that maches the one that was requested.
     public static function find($slug)
     {
-       return static::all()->firstWhere('slug',$slug);
-
+        return static::all()->firstWhere('slug', $slug);
     }
 
     public static function findOrFail($slug)
     {
         $post = static::find($slug);
 
-        if (! $post){
+        if (!$post) {
             throw new ModelNotFoundException();
         }
 
