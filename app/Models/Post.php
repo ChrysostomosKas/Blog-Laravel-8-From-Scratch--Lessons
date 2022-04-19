@@ -48,6 +48,18 @@ class Post
         // Of all the blog posts, find the onoe with a slug that maches the one that was requested.
     public static function find($slug)
     {
-        return static::all()->firstWhere('slug',$slug);
+       return static::all()->firstWhere('slug',$slug);
+
+    }
+
+    public static function findOrFail($slug)
+    {
+        $post = static::find($slug);
+
+        if (! $post){
+            throw new ModelNotFoundException();
+        }
+
+        return $post;
     }
 }
