@@ -3,7 +3,7 @@
         <article class="inline-flex items-center justify-center p-2 bg-indigo-500 rounded-md shadow-lg">
             <h1>
                 <a href="/posts/{{ $post->id }}">
-                    {{ $post->title }}
+                    {!! $post->title !!}
                 </a>
             </h1>
             <div>
