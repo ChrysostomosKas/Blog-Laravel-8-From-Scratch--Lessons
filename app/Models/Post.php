@@ -14,6 +14,8 @@ class Post extends Model
     // OR protected $guarded = ['id'];
     // OR  protected $fillable =['title', 'excerpt', 'body', 'id'];
 
+    protected $with = ['category', 'author'];
+
     /**
      *
      *
