@@ -9,7 +9,7 @@ Route::get('/', function () {
         'posts' => Post::latest()->get(),
         'categories' => \App\Models\Category::all()
     ]);
-});
+})->name('home');
 
 
 // Post::where('slug', $post)->firstOrFail();
@@ -25,7 +25,7 @@ Route::get('categories/{category:slug}', function (\App\Models\Category $categor
         'currentCategory' => $category,
         'categories' => \App\Models\Category::all()
     ]);
-});
+})->name('category');
 
 Route::get('authors/{author:username}', function (User $author) {
     return view('posts', [
