@@ -19,7 +19,7 @@
             @auth()
                 <span class="text-xs font-bold uppercase">Welcome, {{auth()->user()->name}}!</span>
 
-                <form method="POST" action="/logout" class="text-xs font-semibold text-blue-500 ml-6">
+                <form method="POST" action="/logout" class="text-xs font-semi   bold text-blue-500 ml-6">
                     @csrf
 
                     <button type="submit">
