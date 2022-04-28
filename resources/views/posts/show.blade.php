@@ -1,13 +1,13 @@
 <x-layout>
     <section class="px-6 py-8">
-        <nav class="md:flex md:justify-between md:items-center">
             <main class="max-w-6xl mx-auto mt-10 lg:mt-20 space-y-6">
                 <article class="max-w-4xl mx-auto lg:grid lg:grid-cols-12 gap-x-10">
                     <div class="col-span-4 lg:text-center lg:pt-14 mb-10">
                         <img src="/images/illustration-1.png" alt="" class="rounded-xl">
 
                         <p class="mt-4 block text-gray-400 text-xs">
-                            Published <time>{{ $post->created_at->diffForHumans()}}</time>
+                            Published
+                            <time>{{ $post->created_at->diffForHumans()}}</time>
                         </p>
 
                         <div class="flex items-center lg:justify-center text-sm mt-4">
@@ -39,7 +39,7 @@
                             </a>
 
                             <div class="space-x-2">
-                                <x-category-button :category="$post->category" />
+                                <x-category-button :category="$post->category"/>
                             </div>
                         </div>
 
@@ -48,9 +48,17 @@
                         </h1>
 
                         <div class="space-y-4 lg:text-lg leading-loose">
-                                {!!  $post->body !!}
+                            {!!  $post->body !!}
+                        </div>
+                        <section class="col-span-8 col-start-5 mt-10 space-y-6">
+                           <x-post-comment></x-post-comment>
+                           <x-post-comment></x-post-comment>
+                           <x-post-comment></x-post-comment>
+                           <x-post-comment></x-post-comment>
+                        </section>
                     </div>
-                </article>
+                    </article>
             </main>
+
     </section>
 </x-layout>
