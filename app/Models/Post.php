@@ -9,8 +9,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Post extends Model
 {
     use HasFactory;
-
-    protected $guarded = [];
     // OR protected $guarded = ['id'];
     // OR  protected $fillable =['title', 'excerpt', 'body', 'id'];
 
